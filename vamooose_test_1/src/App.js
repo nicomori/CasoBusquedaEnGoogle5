@@ -4,6 +4,24 @@ import firebase from 'firebase';
 import './App.css';
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      user: null
+    };
+
+    this.handleAuth = this.handleAuth.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentWillMount(){
+
+    firebase.auth().onAuthStateChanged(user=> {
+      this.setState({ user });
+    });
+  }
+
   handleAuth (){
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -12,20 +30,72 @@ class App extends Component {
       .catch(error => console.log(`Error acaaaa ${error.code}: ${error.message}`));
   }
 
+  handleLogout (){
+    firebase.auth().signOut()
+    .then(result => console.log(`${result.user.email} se fue`))
+    .catch(error => console.log(`Error acaaaa ${error.code}: ${error.message}`));
+  }
+
+
+
+
+  renderLoginButton (){
+    // si el usuario esta conectado
+    if(this.state.user){
+      return (
+        <div>
+            <img width="100" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+            <p>Hola {this.state.user.displayName}!</p>
+            <button onClick={this.handleLogout}>Salir</button>
+        </div>
+      )
+    } else {
+      return(
+        <button onClick={this.handleAuth}>Login con google 211111</button>
+      );
+    }
+
+    // si no esta conectado
+  }
+
+
+
   render() {
     return (
-      <div className="App">
 
-          <div className="App-header">
+      const { data } = this.props;
+
+      const nameList = data.map(name => {
+        return(
+          <li key={name.id} className={name.sex}> {name.name} </li>
+        )
+
+      })
+
+      return(
+        <ul>
+          {nameList}
+        </ul>
+
+      )
+
+
+
+
+
+      <div className="App">
+      <div className="App-header">
+
             <h2>vamooose_test_1</h2>
 
             <p className="App-intro">
-              <button onClick={this.handleAuth}>login con google</button>
+              {this.renderLoginButton()}
             </p>
-
           </div>
-
       </div>
+
+
+
     );
   }
 }
