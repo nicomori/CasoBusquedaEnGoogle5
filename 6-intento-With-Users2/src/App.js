@@ -3,6 +3,8 @@ import firebase from 'firebase';
 
 import './App.css';
 
+import BackendRest from './Components/BackendRest'
+
 class App extends Component {
 
   constructor() {
@@ -47,6 +49,7 @@ class App extends Component {
             <img width="100" src={this.state.user.photoURL} alt={this.state.user.displayName} />
             <p>Hola {this.state.user.displayName}!</p>
             <button onClick={this.handleLogout}>Salir</button>
+            <BackendRest />
         </div>
       )
     } else {
@@ -62,27 +65,6 @@ class App extends Component {
 
   render() {
     return (
-
-      const { data } = this.props;
-
-      const nameList = data.map(name => {
-        return(
-          <li key={name.id} className={name.sex}> {name.name} </li>
-        )
-
-      })
-
-      return(
-        <ul>
-          {nameList}
-        </ul>
-
-      )
-
-
-
-
-
       <div className="App">
       <div className="App-header">
 
