@@ -9,14 +9,19 @@ export default class BackendRest extends React.Component{
   };
 
   componentDidMount(){
-    axios.get(`http://localhost:8080/greeting?name=Nico`).then(res => {
+    axios.get(`http://localhost:8080/greeting?name=${this.props.email}`).then(res => {
       console.log(res);
       this.setState({ persons: res.data });
     });
+
+
   }
 
 
+
   render(){
+
+
     return (
     <ul>
       {this.state.persons.map(person => (

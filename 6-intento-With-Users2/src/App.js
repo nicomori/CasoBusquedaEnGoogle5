@@ -7,13 +7,18 @@ import BackendRest from './Components/BackendRest';
 
 var varibleExample = "Vamo!";
 
+
+
 class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      email: ''
     };
+
+
 
     this.handleAuth = this.handleAuth.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -27,21 +32,30 @@ class App extends Component {
   }
 
   handleAuth (){
+
+
+
     const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider)
-      .then(result => console.log(`${result.user.email} ha iniciado sesion`))
+      .then(result => {
+        this.setState({email: result.user.email});
+      })
       .catch(error => console.log(`Error acaaaa ${error.code}: ${error.message}`));
 
       //${varibleExample} = ${result.user.email};
-      window[varibleExample] = "juanaaa";
+      //window[varibleExample] = "juanaaa";
+
   }
 
   handleLogout (){
     firebase.auth().signOut()
     .then(result => console.log(`${result.user.email} se fue`))
     .catch(error => console.log(`Error acaaaa ${error.code}: ${error.message}`));
+
+
   }
+
 
 
 
@@ -49,12 +63,13 @@ class App extends Component {
   renderLoginButton (){
     // si el usuario esta conectado
     if(this.state.user){
+      //pepe.myFunction();
       return (
         <div>
             <img width="100" src={this.state.user.photoURL} alt={this.state.user.displayName} />
             <p>Hola {this.state.user.displayName}!</p>
             <button onClick={this.handleLogout}>Salir</button>
-            <BackendRest />
+            <BackendRest email={this.state.email}/>
         </div>
       )
     } else {
@@ -67,21 +82,22 @@ class App extends Component {
   }
 
 
-  //function myFunction(p1, p2) {
-  //    return p1 * p2;              // The function returns the product of p1 and p2
-  //}
+
+
+
+
 
 
 
   playSong(){
     //alert('old number was: '+[varibleExample]+'');
 
-    //window[varibleExample] = "juanaaa";
-
+      //window[varibleExample] = "juanaaa";
+      varibleExample = "juanaaa";
 
       return(
       <div>
-          <p>acaaaa {varibleExample}</p>
+          <p>acaaaa5558899 {varibleExample}</p>
       </div>
       )
   };
@@ -102,6 +118,7 @@ class App extends Component {
 
 
             {this.playSong()}
+
 
 
           </div>
