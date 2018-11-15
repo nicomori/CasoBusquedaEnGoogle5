@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
 	private static final String template = "Saludos!!!!, %s!";
-	private static final String template2 = "Tu Nombre es: , %s!";
+	private static final String template2 = "Tu Nombre es 33333333 : , %s!";
 	private final AtomicLong counter = new AtomicLong();
 
 	@RequestMapping(value = "/greeting", method = RequestMethod.GET)

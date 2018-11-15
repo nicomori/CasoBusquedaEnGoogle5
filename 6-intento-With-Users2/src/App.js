@@ -3,7 +3,9 @@ import firebase from 'firebase';
 
 import './App.css';
 
-import BackendRest from './Components/BackendRest'
+import BackendRest from './Components/BackendRest';
+
+var varibleExample = "Vamo!";
 
 class App extends Component {
 
@@ -30,6 +32,9 @@ class App extends Component {
     firebase.auth().signInWithPopup(provider)
       .then(result => console.log(`${result.user.email} ha iniciado sesion`))
       .catch(error => console.log(`Error acaaaa ${error.code}: ${error.message}`));
+
+      //${varibleExample} = ${result.user.email};
+      window[varibleExample] = "juanaaa";
   }
 
   handleLogout (){
@@ -62,6 +67,25 @@ class App extends Component {
   }
 
 
+  //function myFunction(p1, p2) {
+  //    return p1 * p2;              // The function returns the product of p1 and p2
+  //}
+
+
+
+  playSong(){
+    //alert('old number was: '+[varibleExample]+'');
+
+    //window[varibleExample] = "juanaaa";
+
+
+      return(
+      <div>
+          <p>acaaaa {varibleExample}</p>
+      </div>
+      )
+  };
+
 
   render() {
     return (
@@ -72,7 +96,14 @@ class App extends Component {
 
             <p className="App-intro">
               {this.renderLoginButton()}
+
             </p>
+
+
+
+            {this.playSong()}
+
+
           </div>
       </div>
 
